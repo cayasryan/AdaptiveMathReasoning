@@ -1,6 +1,6 @@
-&lt;div align="center"&gt;
-    &lt;h1&gt; Adaptive Thinking-Time Control and Problem-Aware Reasoning for Math Problems via Reinforcement Learning &lt;/h1&gt;
-&lt;/div&gt;
+<div align="center">
+  <h1>Adaptive Thinking-Time Control and Problem-Aware Reasoning for Math Problems via Reinforcement Learning</h1>
+</div>
 
 ---
 
