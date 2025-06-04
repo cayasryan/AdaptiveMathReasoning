@@ -143,8 +143,6 @@ if __name__ == "__main__":
 
     # Load data
     df = pd.read_parquet(data_path)
-    # Get 2 samples
-    df = df.sample(n=8, random_state=42) if len(df) > 2 else df
 
     prompts = [p[0]["content"] if isinstance(p, np.ndarray) and len(p) > 0 else "" for p in df["prompt"]]
     ground_truths = [rm["ground_truth"] for rm in df["reward_model"]]
