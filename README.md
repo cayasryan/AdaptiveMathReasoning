@@ -25,7 +25,7 @@ cd RL4Math
 If you're only interested in evaluating models (e.g., zero-shot performance on MATH500), set up your environment as follows:
 
 ```bash
-conda create -n math_eval python=3.12
+conda create -n math_eval python=3.12 -y
 conda activate math_eval
 pip install -r reqs_eval.txt
 ```
@@ -36,7 +36,7 @@ pip install -r reqs_eval.txt
 If you intend to fine-tune models via GRPO and then evaluate them:
 
 ```bash
-conda create -n math_finetune python=3.12
+conda create -n math_finetune python=3.12 -y
 conda activate math_finetune
 pip install -r reqs_train.txt
 ```

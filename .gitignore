@@ -12,15 +12,8 @@ __pycache__/
 .env.test.local/
 .env.production.local/
 
-outputs/
 models/
 wandb/
-unsloth_compiled_cache/
-grpo_trainer_lora_model/
-bert_level/
-bert_type/
-
-models/
 
 MATH_data/test/
 MATH_data/train/

@@ -1,0 +1,13 @@
+numpy
+pandas
+sympy
+pylatexenc
+pyarrow
+
+tqdm
+tabulate
+
+torch
+torchvision
+torchaudio
+transformers

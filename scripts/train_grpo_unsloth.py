@@ -6,6 +6,12 @@ from trl import GRPOConfig, GRPOTrainer
 
 import wandb
 
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
 
 from math_reward import math_reward_fn
 
@@ -18,11 +24,7 @@ run_name = "GRPO_MATH_UNSLOTH_L1-Qwen-1.5B-Fixed-Max"
 
 
 train_dataset = load_dataset("parquet", data_files={"train": data_path}, split="train")
-# small_train_dataset = train_dataset.select(range(10))
-
-# Load model and tokenizer
-# tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
-# model = AutoModelForCausalLM.from_pretrained(model_path)
+# small_train_dataset = train_dataset.select(range(10)) # for testing
 
 
 max_seq_length = 4000 # Can increase for longer reasoning traces
