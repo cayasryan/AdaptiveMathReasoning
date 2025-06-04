@@ -175,11 +175,10 @@ def brevity_reward(target_tokens, used_tokens, gamma=1/600):
     Encourages large savings more than small ones.
     """
     if used_tokens < target_tokens:
-        bonus = 0.5 * (1 - math.exp(-gamma * (target_tokens - used_tokens)))
-        reward = 0.5 + bonus
+        reward = 1 - math.exp(-gamma * (target_tokens - used_tokens))
     else:
-        reward = 0.5
-    return min(reward, 1.0)
+        reward = 0
+    return reward
 
 def math_reward_fn(solution_str: str, ground_truth: Union[str, List[str]], num_tokens = -1, valid_response_length = -1, ignore_think_token = False, reward_config : RewardConfig = RewardConfig(), return_delta_score = False):
     reward_fn = RewardMathFn(reward_config)
@@ -190,7 +189,7 @@ def math_reward_fn(solution_str: str, ground_truth: Union[str, List[str]], num_t
 
     reward = -1 if not reward_response.is_correct else brevity_score
 
-    print(f"Used tokens: {valid_response_length}, num_tokens: {num_tokens}, brevity_score: {brevity_score}, correctness_score: {reward_response.is_correct}, reward: {reward}")
+    # print(f"Used tokens: {valid_response_length}, num_tokens: {num_tokens}, brevity_score: {brevity_score}, correctness_score: {reward_response.is_correct}, reward: {reward}")
 
     return reward
 

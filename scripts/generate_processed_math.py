@@ -143,8 +143,8 @@ def parse_args():
     
     parser.add_argument('--math_dir', type=str, default=default_math_dir, help="Directory containing MATH CSV files")
     parser.add_argument('--output_dir', type=str, default=default_output_dir, help="Directory to save output parquet files")
-    parser.add_argument('--type', type=str, default="w_level_type", choices=["no_level_type", "w_level_type", "variable_targets"],
-                        help="Type of processing to apply to the dataset. Options: 'no_level_type', 'w_level_type', 'variable_targets'.")
+    parser.add_argument('--type', type=str, default="w_level_type", choices=["no_level_type", "w_level_type"],
+                        help="Type of processing to apply to the dataset. Options: 'no_level_type', 'w_level_type'.")
     parser.add_argument('--target_tokens', type=int, default=3600, help="Number of tokens to process (use -1 for random)")
 
     return parser.parse_args()

@@ -20,6 +20,8 @@ yaml_path = os.path.join(current_dir, "train_config.yaml")
 with open(yaml_path, "r") as f:
     config = yaml.safe_load(f)
 
+if isinstance(config["learning_rate"], str):
+    config["learning_rate"] = float(config["learning_rate"])
 
 # Settings
 model_path = config["model_path"]
@@ -100,6 +102,7 @@ def math_reward_func(prompts, completions, completion_ids, data_source, ability,
 
 training_keys = GRPOConfig.__init__.__code__.co_varnames
 training_args_dict = {k: v for k, v in config.items() if k in training_keys}
+
 training_args = GRPOConfig(**training_args_dict)
 
 trainer = GRPOTrainer(

@@ -1,0 +1,2 @@
+model_path,dataset,pass@1
+models/L1-Qwen-1.5B-Max,test.parquet,0.832

@@ -2,11 +2,11 @@
 model_path: models/L1-Qwen-1.5B-Max
 data_path: MATH_processed/w_level_type/train.parquet
 output_dir: models/finetuned
-run_name: GRPO_MATH_UNSLOTH_L1-Qwen-1.5B-Fixed-Max
+run_name: GRPO_L1-Adaptive_Run1
 
 # Logging
 wandb_project: GRPO_MATH # optional, only used if report_to == "wandb"
-wandb_run_name: GRPO_FixedTarget_Run1
+wandb_run_name: GRPO_L1-Adaptive_Run1
 
 use_small_dataset: false # Set to true for quick testing with a small subset of the data (10 samples)
 
@@ -28,7 +28,7 @@ per_device_train_batch_size: 8
 gradient_accumulation_steps: 4
 num_generations: 2
 max_prompt_length: 1536
-max_completion_length: 4000 
+max_completion_length: 2000 
 num_train_epochs: 2
 save_steps: 200
 max_grad_norm: 0.5

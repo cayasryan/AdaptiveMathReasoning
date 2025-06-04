@@ -88,7 +88,7 @@ def evaluate_responses(responses, ground_truths, target_tokens, token_lengths):
     total_rewards = []
     passes = 0
     for resp_list, gt, target, used in tqdm(zip(responses, ground_truths, target_tokens, token_lengths), total=len(responses), desc="Evaluating"):
-        rewards_list = [math_reward_fn(r, gt, target, u) for r, u in zip(resp_list, token_lengths)]
+        rewards_list = [math_reward_fn(r, gt, target, u) for r, u in zip(list(resp_list), list(token_lengths))]
         total_rewards.append(rewards_list)
         score_list = [0 if reward == -1 else 1 for reward in rewards_list]
         total_scores.append(score_list)

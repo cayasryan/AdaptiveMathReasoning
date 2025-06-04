@@ -49,7 +49,6 @@ pip install -r reqs_train.txt
 We prepare **three different types of datasets** based on prompt content and target token behavior:
 - `no_level_type`
 - `w_level_type`
-- `variable_targets`
 
 ### 1. `no_level_type`
 
@@ -62,7 +61,7 @@ python3 scripts/generate_processed_math.py \
   --math_dir MATH_data \
   --output_dir MATH_processed/no_level_type \
   --type no_level_type \
-  --target_tokens 3600
+  --target_tokens 2000
 ```
 ---
 
@@ -77,21 +76,8 @@ python3 scripts/generate_processed_math.py \
   --math_dir MATH_data \
   --output_dir MATH_processed/w_level_type \
   --type w_level_type \
-  --target_tokens 3600
+  --target_tokens 2000
 ```
----
-
-### 3. `variable_targets`
-
-This uses the **same prompt format** as `w_level_type`, but the value of `<target_tokens>` **varies automatically** depending on the problem type and difficulty level.
-
-```bash
-python3 scripts/generate_processed_math.py \
-  --math_dir MATH_data \
-  --output_dir MATH_processed/variable_targets \
-  --type variable_targets
-```
-
 ---
 
 ## 🧬 II. Fine-tuning Models with GRPO
@@ -113,7 +99,7 @@ python3 scripts/train_grpo_unsloth.py
 
 ## 📊 III. Evaluating Models on MATH500
 
-To evaluate a model on the MATH500 benchmark:
+To evaluate a model on the MATH500 benchmark, run the command below. The model_path can also be a Hugging Face location. For this work, we used `l3lab/L1-Qwen-1.5B-Max`.
 
 ```bash
 python3 scripts/get_and_eval_responses.py \
@@ -121,7 +107,7 @@ python3 scripts/get_and_eval_responses.py \
   --data_path MATH_processed/no_level_type/test.parquet \
   --output_dir eval_results/ \
   --n_samples 1 \
-  --max_new_tokens 8000 \
+  --max_new_tokens 2000 \
   --batch_size 32
 ```
 Results will be saved in the specified `output_dir` as `.parquet` files and a `.csv` file will also log evaluation scores..
