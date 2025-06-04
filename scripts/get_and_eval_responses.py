@@ -88,7 +88,9 @@ def evaluate_responses(responses, ground_truths, target_tokens, token_lengths):
     total_rewards = []
     passes = 0
     for resp_list, gt, target, used in tqdm(zip(responses, ground_truths, target_tokens, token_lengths), total=len(responses), desc="Evaluating"):
-        rewards_list = [math_reward_fn(r, gt, target, u) for r, u in zip(list(resp_list), list(token_lengths))]
+        used = list(used)
+        resp_list = list(resp_list)
+        rewards_list = [math_reward_fn(r, gt, target, u) for r, u in zip(list(resp_list), list(used))]
         total_rewards.append(rewards_list)
         score_list = [0 if reward == -1 else 1 for reward in rewards_list]
         total_scores.append(score_list)
@@ -141,6 +143,8 @@ if __name__ == "__main__":
 
     # Load data
     df = pd.read_parquet(data_path)
+    # Get 2 samples
+    df = df.sample(n=8, random_state=42) if len(df) > 2 else df
 
     prompts = [p[0]["content"] if isinstance(p, np.ndarray) and len(p) > 0 else "" for p in df["prompt"]]
     ground_truths = [rm["ground_truth"] for rm in df["reward_model"]]
