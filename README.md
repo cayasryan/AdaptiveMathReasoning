@@ -35,7 +35,7 @@ pip install -r reqs.txt
 
 ## 🛠️ I. Generating Processed MATH Datasets
 
-We prepare **three different types of datasets** based on prompt content and target token behavior:
+We prepare **two different types of datasets** based on prompt content and target token behavior:
 - `no_level_type`
 - `w_level_type`
 
@@ -75,7 +75,7 @@ We use [Unsloth](https://github.com/unslothai/unsloth) for efficient fine-tuning
 
 Before running the training script, feel free to customize the training behavior by modifying the configuration file at `scripts/train_config.yaml`.
 
-This file includes model paths, data paths, training hyperparameters, LoRA settings, and logging options (e.g. `wandb`).
+This file includes model paths, data paths, training hyperparameters, LoRA settings, and logging options (e.g. `wandb`). When reporting to Weights and Biases, make sure to login first via `wandb login`.
 
 Make any changes you need before launching training:
 ```bash
