@@ -3,6 +3,7 @@ datasets
 trl
 wandb
 pyyaml
+vllm
 
 numpy
 pandas

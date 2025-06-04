@@ -106,7 +106,9 @@ Make any changes you need before launching training:
 ```bash
 python3 scripts/train_grpo_unsloth.py
 ```
-
+> [!warning]
+> Loading weights with BitsAndBytes quantization will take a while.  
+> Do **not** exit prematurely — this is expected behavior.
 ---
 
 ## 📊 III. Evaluating Models on MATH500
