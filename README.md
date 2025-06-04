@@ -17,8 +17,8 @@ Run all commands below from the **project root**.
 ### 📁 Clone the Repository
 
 ```bash
-git clone https://github.com/cayasryan/RL4Math.git
-cd RL4Math
+git clone https://github.com/cayasryan/AdaptiveMathReasoning.git
+cd AdaptiveMathReasoning
 ```
 ---
 
