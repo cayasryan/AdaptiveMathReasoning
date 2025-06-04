@@ -16,7 +16,7 @@ This repository contains code to reproduce the results of our work on **Adaptive
 
 ```bash
 git clone https://github.com/cayasryan/RL4Math.git
-cd your-repo-name
+cd RL4Math
 ```
 ---
 
@@ -89,7 +89,7 @@ Results will be saved in the specified `output_dir` as a `.json` or `.csv` file 
 
 ---
 
-## 📁 Directory Structure
+<!-- ## 📁 Directory Structure
 
 your-repo-name/
 ├── MATH_processed/
@@ -103,17 +103,17 @@ your-repo-name/
 ├── evaluate_math500.py
 ├── reqs_eval.txt
 ├── reqs_train.txt
-└── README.md
+└── README.md -->
 
----
+<!-- --- -->
 
-## 📌 Notes
+<!-- ## 📌 Notes
 
 - Ensure that your input CSVs (`math_train.csv`, `math_val.csv`, `math500_test.csv`) are inside the `MATH/` folder or your custom `--math_dir`.
 - The GRPO implementation uses Unsloth for memory-efficient training with LoRA adapters.
-- The code supports evaluation using chain-of-thought prompting and boxed-answer extraction.
+- The code supports evaluation using chain-of-thought prompting and boxed-answer extraction. -->
 
----
+<!-- --- -->
 
 ## 📜 Citation
 
