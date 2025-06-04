@@ -110,7 +110,7 @@ python3 scripts/get_and_eval_responses.py \
   --max_new_tokens 2000 \
   --batch_size 32
 ```
-Results will be saved in the specified `output_dir` as `.parquet` files and a `.csv` file will also log evaluation scores..
+Results will be saved in the specified `output_dir` as `.parquet` files and a `.csv` file will also log evaluation scores.
 
 ---
 
