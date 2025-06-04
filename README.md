@@ -1,4 +1,3 @@
-<pre>
 &lt;div align="center"&gt;
     &lt;h1&gt; Adaptive Thinking-Time Control and Problem-Aware Reasoning for Math Problems via Reinforcement Learning &lt;/h1&gt;
 &lt;/div&gt;
@@ -119,4 +118,3 @@ your-repo-name/
 ## 📜 Citation
 
 Coming soon.
-</pre>
