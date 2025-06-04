@@ -21,7 +21,7 @@ def extract_solution(solution_str: str) -> str:
 def make_map_fn(split: str, type_: str, num_tokens: int = -1):
     def process_fn_no_level_type(example: Dict[str, Any], idx: int) -> Optional[Dict[str, Any]]:
         question = example['problem']
-        answer = example['solution'] if 'solution' in example else example['answer']
+        answer = example['answer'] 
         target_tokens = num_tokens if num_tokens != -1 else random.randint(100, 4000)
         instruction = "Let's think step by step and output the final answer within \\boxed{}."
         instruction += f" Think for maximum {abs(target_tokens)} tokens."
@@ -49,7 +49,7 @@ def make_map_fn(split: str, type_: str, num_tokens: int = -1):
     
     def process_fn_w_level_type(example: Dict[str, Any], idx: int) -> Optional[Dict[str, Any]]:
         question = example['problem']
-        answer = example['solution'] if 'solution' in example else example['answer']
+        answer = example['answer'] 
         target_tokens = num_tokens if num_tokens != -1 else random.randint(100, 4000)
         instruction = "Let's think step by step and output the final answer within \\boxed{}."
         level = example.get('level', 'unknown')
@@ -80,7 +80,7 @@ def make_map_fn(split: str, type_: str, num_tokens: int = -1):
     
     def process_fn_variable_targets(example: Dict[str, Any], idx: int) -> Optional[Dict[str, Any]]:
         question = example['problem']
-        answer = example['solution'] if 'solution' in example else example['answer']
+        answer = example['answer'] 
      
         instruction = "Let's think step by step and output the final answer within \\boxed{}."
         level = example.get('level', 'unknown')
