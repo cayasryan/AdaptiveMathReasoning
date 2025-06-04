@@ -2,6 +2,7 @@ unsloth
 datasets
 trl
 wandb
+pyyaml
 
 numpy
 pandas

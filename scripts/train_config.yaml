@@ -1,0 +1,37 @@
+# Model and data
+model_path: models/L1-Qwen-1.5B-Max
+data_path: MATH_processed/w_level_type/train.parquet
+output_dir: models/finetuned
+run_name: GRPO_MATH_UNSLOTH_L1-Qwen-1.5B-Fixed-Max
+
+# Logging
+wandb_project: GRPO_MATH # optional, only used if report_to == "wandb"
+wandb_run_name: GRPO_FixedTarget_Run1
+
+use_small_dataset: false # Set to true for quick testing with a small subset of the data (10 samples)
+
+# Optional model configs
+max_seq_length: 4000 # Can increase for longer reasoning traces
+lora_rank: 64 # Larger rank = smarter, but slower
+gpu_model_memory_utilization: 0.5 # Reduce if out of memory
+
+# Training settings
+learning_rate: 5e-6
+adam_beta1: 0.9
+adam_beta2: 0.99
+weight_decay: 0.1
+warmup_ratio: 0.1
+lr_scheduler_type: cosine
+logging_steps: 10
+bf16: true
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4
+num_generations: 2
+max_prompt_length: 1536
+max_completion_length: 4000 
+num_train_epochs: 2
+save_steps: 200
+max_grad_norm: 0.1
+report_to: wandb
+log_on_each_node: false
+

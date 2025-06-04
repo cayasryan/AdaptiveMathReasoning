@@ -4,10 +4,10 @@ from unsloth import FastLanguageModel, FastModel
 from datasets import load_dataset
 from trl import GRPOConfig, GRPOTrainer
 
-import wandb
-
 import os
 import sys
+
+import yaml
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
@@ -16,19 +16,38 @@ if current_dir not in sys.path:
 from math_reward import math_reward_fn
 
 
+yaml_path = os.path.join(current_dir, "train_config.yaml")
+with open(yaml_path, "r") as f:
+    config = yaml.safe_load(f)
+
+
 # Settings
-model_path = "models/L1-Qwen-1.5B-Max"
-data_path = "scripts/data/MATH_processed_w_level_type/train.parquet"
-output_dir = "scripts/data/MATH_finetuned"
-run_name = "GRPO_MATH_UNSLOTH_L1-Qwen-1.5B-Fixed-Max"
+model_path = config["model_path"]
+data_path = config["data_path"]
+output_dir = config["output_dir"]
+run_name = config["run_name"]
+
+max_seq_length = config["max_seq_length"]
+lora_rank = config["lora_rank"]
+use_small_dataset = config["use_small_dataset"]
+gpu_model_memory_utilization = config["gpu_model_memory_utilization"]
 
 
 train_dataset = load_dataset("parquet", data_files={"train": data_path}, split="train")
-# small_train_dataset = train_dataset.select(range(10)) # for testing
+if use_small_dataset:
+    train_dataset = train_dataset.select(range(10)) # for testing
 
 
-max_seq_length = 4000 # Can increase for longer reasoning traces
-lora_rank = 64 # Larger rank = smarter, but slower
+report_to = config.get("report_to", "none")
+
+if report_to == "wandb":
+    import wandb
+    wandb.init(
+        project=config.get("wandb_project", "default_project"),
+        name=config.get("wandb_run_name", "default_run"),
+    )
+
+
 
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name = model_path,
@@ -36,7 +55,7 @@ model, tokenizer = FastLanguageModel.from_pretrained(
     load_in_4bit = True, # False for LoRA 16bit
     fast_inference = True, # Enable vLLM fast inference
     max_lora_rank = lora_rank,
-    gpu_memory_utilization = 0.5, # Reduce if out of memory
+    gpu_memory_utilization = gpu_model_memory_utilization, # Reduce if out of memory
 )
 
 model = FastLanguageModel.get_peft_model(
@@ -79,29 +98,9 @@ def math_reward_func(prompts, completions, completion_ids, data_source, ability,
 
 
 
-
-training_args = GRPOConfig(
-                            output_dir=output_dir,
-                            run_name=run_name,
-                            learning_rate=5e-6,
-                            adam_beta1 = 0.9,
-                            adam_beta2 = 0.99,
-                            weight_decay = 0.1,
-                            warmup_ratio = 0.1,
-                            lr_scheduler_type='cosine',
-                            logging_steps=10,
-                            bf16=True,
-                            per_device_train_batch_size=2,
-                            gradient_accumulation_steps=4,
-                            num_generations=2,
-                            max_prompt_length=1536,
-                            max_completion_length=4000,
-                            num_train_epochs=2,
-                            save_steps=200,
-                            max_grad_norm=0.1,
-                            report_to="wandb",
-                            log_on_each_node=False,
-                        )
+training_keys = GRPOConfig.__init__.__code__.co_varnames
+training_args_dict = {k: v for k, v in config.items() if k in training_keys}
+training_args = GRPOConfig(**training_args_dict)
 
 trainer = GRPOTrainer(
     model=model,

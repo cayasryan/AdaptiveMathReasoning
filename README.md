@@ -6,7 +6,7 @@
 
 ## 🧠 Overview
 
-This repository contains code to reproduce the results of our work on **Adaptive Thinking-Time Control** and **Problem-Aware Reasoning** for solving MATH problems using **Reinforcement Learning** techniques. The code supports both evaluation and fine-tuning using **GRPO (Gradient Reward Policy Optimization)**.
+This repository contains code to reproduce the results of our work on **Adaptive Thinking-Time Control** and **Problem-Aware Reasoning** for solving MATH problems using **Reinforcement Learning**. The code supports both evaluation and fine-tuning using **GRPO (Gradient Reward Policy Optimization)**.
 
 ---
 
@@ -96,19 +96,16 @@ python3 scripts/generate_processed_math.py \
 
 ## 🧬 II. Fine-tuning Models with GRPO
 
-We use [Unsloth](https://github.com/unslothai/unsloth) for efficient fine-tuning via GRPO. To train your own model on the processed MATH data:
+We use [Unsloth](https://github.com/unslothai/unsloth) for efficient fine-tuning via GRPO.
 
+Before running the training script, feel free to customize the training behavior by modifying the configuration file at `scripts/train_config.yaml`.
+
+This file includes model paths, data paths, training hyperparameters, LoRA settings, and logging options (e.g. `wandb`).
+
+Make any changes you need before launching training:
 ```bash
-python train.py \
-  --model_name_or_path unsloth/llama-3-1b-instruct \
-  --train_file /path/to/train.parquet \
-  --val_file /path/to/val.parquet \
-  --output_dir ./checkpoints/grpo_llama3 \
-  --learning_rate 2e-5 \
-  --num_train_epochs 3 \
-  --per_device_train_batch_size 16
+python3 scripts/train_grpo_unsloth.py
 ```
-&gt; Make sure your processed datasets are generated beforehand (see Section I).
 
 ---
 
@@ -117,13 +114,15 @@ python train.py \
 To evaluate a model on the MATH500 benchmark:
 
 ```bash
-python evaluate_math500.py \
-  --model_path ./checkpoints/grpo_llama3 \
-  --test_file /path/to/test.parquet \
-  --output_dir ./results/math500_eval \
+python3 scripts/get_and_eval_responses.py \
+  --model_path models/L1-Qwen-1.5B-Max \
+  --data_path MATH_processed/no_level_type/test.parquet \
+  --output_dir eval_results/ \
+  --n_samples 1 \
+  --max_new_tokens 8000 \
   --batch_size 32
 ```
-Results will be saved in the specified `output_dir` as a `.json` or `.csv` file depending on your implementation.
+Results will be saved in the specified `output_dir` as `.parquet` files and a `.csv` file will also log evaluation scores..
 
 ---
 
@@ -153,6 +152,6 @@ your-repo-name/
 
 <!-- --- -->
 
-## 📜 Citation
+<!-- ## 📜 Citation
 
-Coming soon.
+Coming soon. -->
