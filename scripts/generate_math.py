@@ -6,11 +6,11 @@ from typing import Dict, Any, Optional, List
 import sys
 
 # Add parent directory to sys.path
-parent_dir = os.path.abspath("../..") 
+parent_dir = os.path.abspath("..") 
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from utils import last_boxed_only_string, remove_boxed
+from scripts.utils import last_boxed_only_string, remove_boxed
 
 def extract_solution(solution_str: str) -> str:
     """Extract the final boxed solution from a solution string."""
