@@ -6,7 +6,7 @@ run_name: GRPO_L1-Adaptive_Run2_3k
 
 # Logging
 wandb_project: GRPO_MATH # optional, only used if report_to == "wandb"
-wandb_run_name: GRPO_L1-Adaptive_Run1
+wandb_run_name: GRPO_L1-Adaptive_Run2_3k
 
 use_small_dataset: false # Set to true for quick testing with a small subset of the data (10 samples)
 
