@@ -12,6 +12,8 @@ This repository contains code to reproduce the results of our work on **Adaptive
 
 ## 📦 Setup
 
+Run all commands below from the **project root**.
+
 ### 📁 Clone the Repository
 
 ```bash
@@ -44,15 +46,51 @@ pip install -r reqs_train.txt
 
 ## 🛠️ I. Generating Processed MATH Datasets
 
-To generate LLM-ready datasets from the original MATH CSVs, run the following command from the **project root**:
+We prepare **three different types of datasets** based on prompt content and target token behavior:
+- `no_level_type`
+- `w_level_type`
+- `variable_targets`
+
+### 1. `no_level_type`
+
+In this setting, the prompt **does not include** any information about problem type or difficulty. The format is:
+
+> `<prompt> = <problem> Let's think step by step and output the final answer within \boxed{}. Think for maximum <target_tokens> tokens.`
 
 ```bash
-python3 MATH_processed/generate_math.py \
-  --math_dir /path/to/MATH \
-  --output_dir /path/to/output_dir \
-  --num_tokens -3600
+python3 scripts/generate_processed_math.py \
+  --math_dir MATH_data \
+  --output_dir MATH_processed/no_level_type \
+  --type no_level_type \
+  --target_tokens 3600
 ```
-By default, it reads from a local `MATH/` directory and saves processed data to `MATH_processed_w_level_type/`.
+---
+
+### 2. `w_level_type`
+
+This configuration includes **both difficulty and problem type** in the prompt. The model is instructed to adjust its reasoning length accordingly:
+
+> `<prompt> = <problem> Let's think step by step and output the final answer within \boxed{}. The problem is of difficulty level <level> and its type is <type>. Think for maximum <target_tokens> tokens and shorten thinking time based on the difficulty and type.`
+
+```bash
+python3 scripts/generate_processed_math.py \
+  --math_dir MATH_data \
+  --output_dir MATH_processed/w_level_type \
+  --type w_level_type \
+  --target_tokens 3600
+```
+---
+
+### 3. `variable_targets`
+
+This uses the **same prompt format** as `w_level_type`, but the value of `<target_tokens>` **varies automatically** depending on the problem type and difficulty level.
+
+```bash
+python3 scripts/generate_processed_math.py \
+  --math_dir MATH_data \
+  --output_dir MATH_processed/variable_targets \
+  --type variable_targets
+```
 
 ---
 
