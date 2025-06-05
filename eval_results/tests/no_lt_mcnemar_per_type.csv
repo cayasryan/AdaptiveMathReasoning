@@ -1,0 +1,8 @@
+level,mcnemar_stat,p_value,p_adj,significant
+Algebra,5.0,0.7744140625,0.9034830729166667,False
+Counting & Probability,1.0,0.625,0.875,False
+Geometry,1.0,0.625,0.875,False
+Intermediate Algebra,7.0,1.0,1.0,False
+Number Theory,0.0,0.125,0.875,False
+Prealgebra,3.0,0.5078125,0.875,False
+Precalculus,2.0,0.453125,0.875,False
