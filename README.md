@@ -92,7 +92,7 @@ To evaluate a model on the MATH500 benchmark, run the command below. The model_p
 
 ```bash
 python3 scripts/get_and_eval_responses.py \
-  --model_path models/L1-Qwen-1.5B-Max \
+  --model_path l3lab/L1-Qwen-1.5B-Max \
   --data_path MATH_processed/no_level_type/test.parquet \
   --output_dir eval_results/ \
   --n_samples 1 \
