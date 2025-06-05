@@ -1,7 +1,8 @@
-model_path,dataset,pass@1
-models/L1-Qwen-1.5B-Max,test.parquet,0.804
-models/L1-Qwen-1.5B-Max,test.parquet,0.792
-models/L1-Qwen-1.5B-Max,test.parquet,1.0
-models/L1-Qwen-1.5B-Max,test.parquet,1.0
-models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,0.782
-models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,0.72
+model_path,dataset,prompt_type,pass@1
+models/L1-Qwen-1.5B-Max,test.parquet,no_level_type,0.804
+models/L1-Qwen-1.5B-Max,test.parquet,w_level_type,0.792
+models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,no_level_type,0.782
+models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,w_level_type,0.72
+models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,w_level_type,0.72
+models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,w_level_type,0.72
+models/L1-Qwen-1.5B-Max,test.parquet,w_level_type,0.792

@@ -151,15 +151,10 @@ if __name__ == "__main__":
     # Generate responses
     responses, token_lengths = generate_responses(model, tokenizer, prompts, n_samples=n_samples, max_new_tokens=max_new_tokens, batch_size=batch_size)
 
-    # Save responses
-    df["responses"] = responses
-    df["token_lengths"] = token_lengths
 
-    output_filename = f"Responses_{model_name}_{split_name}.parquet"
-    output_parquet = os.path.join(output_dir, output_filename)
-    df.to_parquet(output_parquet)
-    print(f"Saved responses to {output_parquet}")
+    prompt_type = os.path.normpath(data_path).split(os.sep)[1]
 
+    
     # Evaluate
     pass_at_1, pass_at_n, total_scores, total_rewards = evaluate_responses(responses, ground_truths, target_tokens, token_lengths)
     print(f"pass@1: {pass_at_1:.4f}, pass@{n_samples}: {pass_at_n:.4f}")
@@ -169,6 +164,7 @@ if __name__ == "__main__":
     row_data = {
         "model_path": model_path,
         "dataset": os.path.basename(data_path),
+        "prompt_type": prompt_type,
         "pass@1": pass_at_1,
         f"pass@{n_samples}": pass_at_n
     }
@@ -179,15 +175,17 @@ if __name__ == "__main__":
             writer.writeheader()
         writer.writerow(row_data)
 
-    # Save total_scores
-    total_scores_df = pd.DataFrame(total_scores)
-    total_rewards_df = pd.DataFrame(total_rewards)
 
-    total_scores_filename = f"TotalScores_{model_name}_{split_name}.parquet"
-    total_scores_df.to_parquet(os.path.join(output_dir, total_scores_filename))
+    # Save responses
+    df["responses"] = responses
+    df["token_lengths"] = token_lengths
+    df["is_correct"] = total_scores
+    df["rewards"] = total_rewards
 
-    total_rewards_filename = f"TotalRewards_{model_name}_{split_name}.parquet"
-    total_rewards_df.to_parquet(os.path.join(output_dir, total_rewards_filename))
+    output_filename = f"Responses_{model_name}_{split_name}_{prompt_type}_{target_tokens[0]}TargetTokens.parquet"
+    output_parquet = os.path.join(output_dir, output_filename)
+    df.to_parquet(output_parquet)
+    print(f"Saved responses to {output_parquet}")
 
     # Print summary
     table_data = [[k, v] for k, v in row_data.items()]
