@@ -169,7 +169,7 @@ class RewardMathFn(RewardFn):
         return RewardOutput(reward=self.config.incorrect_reward, is_correct=False)
 
 
-def brevity_reward(target_tokens, used_tokens, gamma=1/600):
+def brevity_reward(target_tokens, used_tokens, gamma=0.0003):
     """
     Exponential brevity bonus; caps at 1.0.
     Encourages large savings more than small ones.

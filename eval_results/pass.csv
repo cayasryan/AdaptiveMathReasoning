@@ -6,3 +6,11 @@ models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,w_level_type,0.72
 models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,w_level_type,0.72
 models/L1-Max-Qwen-1.5B-Adaptive,test.parquet,w_level_type,0.72
 models/L1-Qwen-1.5B-Max,test.parquet,w_level_type,0.792
+models/L1-Qwen-1.5B-Max,test.parquet,w_level_type,0.83
+models/L1-Qwen-1.5B-Max,test.parquet,no_level_type,0.83
+models/finetuned/checkpoint-400,test.parquet,no_level_type,0.794
+models/finetuned_3k/checkpoint-200,test.parquet,no_level_type,0.79
+models/finetuned_3k/checkpoint-200,test.parquet,w_level_type,0.786
+models/finetuned/checkpoint-400,test.parquet,w_level_type,0.756
+models/finetuned_3k/checkpoint-400,test.parquet,no_level_type,0.804
+models/finetuned_3k/checkpoint-400,test.parquet,w_level_type,0.784
